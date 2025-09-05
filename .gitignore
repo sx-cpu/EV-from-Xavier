@@ -1,0 +1,7 @@
+*.csv
+*.png
+*.vscode
+*.pyc
+__pycache__/
+res/
+datasets/

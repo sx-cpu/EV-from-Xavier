@@ -85,6 +85,19 @@ def create_slot_data():
             processed_data = slotted_data[slotted_data.Energy_required != 0]
             processed_data['Departure_time'] = processed_data['Start_time'] + processed_data['Connected_time']
             processed_data = processed_data[processed_data.Departure_time <= processed_data.Start_time + 24]
+            weirdline = (processed_data.Connected_time <= 18.01) & (processed_data.Connected_time > 17.99)
+            processed_data = processed_data[~weirdline]
+            processed_data = processed_data.reset_index()
+
+            if config['verbose'] > 1:
+                print(' ------------------- Created slotted data: Data cleaning - ')
+                print(' \t\t Energy required > 0')
+                print(' \t\t Departure time < Start time + 24 hours')
+                print(' \t\t Removed the weird line in data')
+
+        # save slotted data file
+        processed_data.to_csv(os.path.join(save_location, save_file_name))
+        return save_file_name, save_location
 
 
 

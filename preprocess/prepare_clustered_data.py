@@ -1,4 +1,7 @@
 import os
+from handles.data_hand import get_csv_data
+from preprocess.clustering.session_clusters import session_clustering
+from preprocess.create_slot_data import create_slot_data
 
 
 
@@ -18,3 +21,11 @@ def create_processed_data():
     else:
         if config['verbose'] > 0: print(' ------------------- Creating Processed Data File -------------------')
         
+        # call slotting script. this will create the slotted data that we need from transactions
+        slot_file_name, slot_file_loc = create_slot_data()
+
+        # call session clustering script. This will generate the session clusters
+        ses_clust_file_name, ses_clust_file_path = session_clustering(slot_file_path=slot_file_loc,
+                                                                       slot_file_name=slot_file_name)
+
+   
