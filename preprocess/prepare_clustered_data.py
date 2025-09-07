@@ -28,4 +28,6 @@ def create_processed_data():
         ses_clust_file_name, ses_clust_file_path = session_clustering(slot_file_path=slot_file_loc,
                                                                        slot_file_name=slot_file_name)
 
+        # call pole clustering script. This will generate the clusters for pole types
+        
    
