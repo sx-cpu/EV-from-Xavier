@@ -1,6 +1,7 @@
 import os
 from handles.data_hand import get_csv_data
 from preprocess.clustering.session_clusters import session_clustering
+from preprocess.clustering.pole_clusters import pole_clustering
 from preprocess.create_slot_data import create_slot_data
 
 
@@ -29,5 +30,8 @@ def create_processed_data():
                                                                        slot_file_name=slot_file_name)
 
         # call pole clustering script. This will generate the clusters for pole types
+        # pole_clust_file_name, pole_clust_file_path = pole_clustering(ses_clust_file_path=ses_clust_file_path,
+                                                                    # ses_clust_file_name=ses_clust_file_name)
+        
         
    

@@ -57,6 +57,23 @@ def session_clustering(slot_file_name, slot_file_path):
             {'Start_time': ['mean'], 'Departure_time': ['mean']})
         means.columns = ['Start_month', 'Clusters', 'Start_mean', 'Departure_mean']
         means_withoutnoise = means[means['Clusters'] >= 0]
+        # # Here we force the number of lusters to be three.
+        # epsilon = 0.5
+        # min_samples = 20
+        # alpha = 0.01
+        # how_many = 3
+        # while True:
+        #     mean_clusters = DBSCAN(eps=epsilon, min_samples=min_samples).fit(means_withoutnoise[['Start_mean', 'Departure_mean']])
+        #     epsilon = epsilon - alpha
+        #     if config['verbose'] > 2: print(" \t\t Year clusteres Created :",np.unique(mean_clusters))
+        #     if len(np.unique(mean_clusters)) == how_many or epsilon < 0:
+        #         if epsilon < 0:
+        #             if config['verbose'] > 2: print(" \t\t ","Specified number of clusters not found -- ")
+        #         if len(np.unique(mean_clusters)) == how_many:
+        #             if config['verbose'] > 2: print(" \t\t ","3 clusters found -- ")
+        #         break    
+
+        # 0.7, 3
         mean_clusters = DBSCAN(eps=2, min_samples=6).fit(means_withoutnoise[['Start_mean', 'Departure_mean']])
         means_withoutnoise['Final_clusters'] = mean_clusters.labels_
         means_withoutnoise = means_withoutnoise.copy()

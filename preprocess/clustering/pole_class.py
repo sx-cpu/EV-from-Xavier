@@ -37,3 +37,14 @@ class pole:
         # This splits the dataframe into various dataframes based on which pole the charging takes place in
         dfs = [rows for _, rows in self._data.groupby(self._pole_col_name)]
         return dfs
+
+    def pivot_poles(self, col):
+        # this will pivot the cols into rows. we can use the indicator variable to keep track of the total sessions
+
+        # this is the group by 4 coulmuns and sum all the other columns
+        df = self._data.groupby([col, 'Charge_point'], as_index=False).sum()
+        df1 = df.pivot_table(columns=[col], index='Charge_point', values='Indicator',fill_value=0).reset_index()
+        self._current_df = df1
+        return df1
+    
+    
